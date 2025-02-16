@@ -15,7 +15,7 @@ const isAuthenticated = () => {
 const LoginPage = () => {
   const handleLogin = () => {
     localStorage.setItem("auth", "true");
-    window.location.href = "/users";
+    window.location.href = "/router7/users";
   };
 
   return (
@@ -27,7 +27,7 @@ const LoginPage = () => {
 };
 
 const PrivateRoute = ({ children }) => {
-  return isAuthenticated() ? children : <Navigate to="/login" replace />;
+  return isAuthenticated() ? children : <Navigate to="/router7/login" replace />;
 };
 
 const Layout = () => {
@@ -136,5 +136,5 @@ export const router = createBrowserRouter([
       { path: "/router7/*", element: <h3>Not Found</h3> },
     ],
   },
-]);
+], { basename: "/router7" });
 
