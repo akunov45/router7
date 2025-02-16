@@ -35,9 +35,9 @@ const Layout = () => {
     <>
       <nav>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/users">Users</Link></li>
+          <li><Link to="/router7/">Home</Link></li>
+          <li><Link to="/router7/about">About</Link></li>
+          <li><Link to="/router7/users">Users</Link></li>
         </ul>
       </nav>
       <Suspense fallback={<div>Loading...</div>}>
@@ -78,7 +78,7 @@ export default function UsersPage() {
       <ul>
         {users.map((user) => (
           <li key={user.id}>
-            <Link to={`/user/${user.id}`}>{user.name}</Link>
+            <Link to={`/router7/user/${user.id}`}>{user.name}</Link>
           </li>
         ))}
       </ul>
@@ -108,15 +108,15 @@ async function userLoader({ params }) {
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/router7/",
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <h3>Home</h3>, errorElement: <ErrorPage />, },
-      { path: "about", element: <h3>About</h3>, errorElement: <ErrorPage />, },
-      { path: "login", element: <LoginPage />, errorElement: <ErrorPage />, },
+      { path: "/router7/about", element: <h3>About</h3>, errorElement: <ErrorPage />, },
+      { path: "/router7/login", element: <LoginPage />, errorElement: <ErrorPage />, },
       {
-        path: "users", element: (
+        path: "/router7/users", element: (
           <PrivateRoute>
             <UsersPage />
           </PrivateRoute>
@@ -125,7 +125,7 @@ export const router = createBrowserRouter([
         loader: usersLoader
       },
       {
-        path: "user/:id", element: (
+        path: "/router7/user/:id", element: (
           <PrivateRoute>
             <UserDetailPage />
           </PrivateRoute>
@@ -133,7 +133,7 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         loader: userLoader
       },
-      { path: "*", element: <h3>Not Found</h3> },
+      { path: "/router7/*", element: <h3>Not Found</h3> },
     ],
   },
 ]);
