@@ -139,7 +139,6 @@ export const router = createBrowserRouter(
       ],
     },
   ],
-  { basename: "/router7" } // ✅ Указываем базовый путь
 );
 
 
