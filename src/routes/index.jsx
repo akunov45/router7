@@ -59,8 +59,8 @@ async function usersLoader() {
   }
 }
 
-const ErrorPage = () => {
-  const error = useRouteError();
+const ErrorPage = ({ error }) => {
+  console.error("Ошибка в маршрутах:", error);
   return (
     <div>
       <h1>Ошибка!</h1>
@@ -68,6 +68,7 @@ const ErrorPage = () => {
     </div>
   );
 };
+
 
 export default function UsersPage() {
   const users = useLoaderData();
@@ -106,35 +107,39 @@ async function userLoader({ params }) {
   return res.json();
 }
 
-export const router = createBrowserRouter([
-  {
-    path: "/router7/",
-    element: <Layout />,
-    errorElement: <ErrorPage />,
-    children: [
-      { index: true, element: <h3>Home</h3>, errorElement: <ErrorPage />, },
-      { path: "/router7/about", element: <h3>About</h3>, errorElement: <ErrorPage />, },
-      { path: "/router7/login", element: <LoginPage />, errorElement: <ErrorPage />, },
-      {
-        path: "/router7/users", element: (
-          <PrivateRoute>
-            <UsersPage />
-          </PrivateRoute>
-        ),
-        errorElement: <ErrorPage />,
-        loader: usersLoader
-      },
-      {
-        path: "/router7/user/:id", element: (
-          <PrivateRoute>
-            <UserDetailPage />
-          </PrivateRoute>
-        ),
-        errorElement: <ErrorPage />,
-        loader: userLoader
-      },
-      { path: "/router7/*", element: <h3>Not Found</h3> },
-    ],
-  },
-], { basename: "/router7" });
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [
+        { index: true, element: <h3>Home</h3> },
+        { path: "about", element: <h3>About</h3> },
+        { path: "login", element: <LoginPage /> },
+        {
+          path: "users",
+          element: (
+            <PrivateRoute>
+              <UsersPage />
+            </PrivateRoute>
+          ),
+          loader: usersLoader,
+        },
+        {
+          path: "user/:id",
+          element: (
+            <PrivateRoute>
+              <UserDetailPage />
+            </PrivateRoute>
+          ),
+          loader: userLoader,
+        },
+        { path: "*", element: <h3>Not Found</h3> },
+      ],
+    },
+  ],
+  { basename: "/router7" } // ✅ Указываем базовый путь
+);
+
 
