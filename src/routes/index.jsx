@@ -1,5 +1,3 @@
-
-
 import { Suspense } from 'react';
 import {
   createBrowserRouter,
@@ -10,7 +8,6 @@ import {
   useRouteError,
 } from 'react-router-dom';
 
-
 const isAuthenticated = () => {
   return localStorage.getItem("auth") === "true";
 };
@@ -18,7 +15,7 @@ const isAuthenticated = () => {
 const LoginPage = () => {
   const handleLogin = () => {
     localStorage.setItem("auth", "true");
-    window.location.href = "/users"; // Redirect after login
+    window.location.href = "/users";
   };
 
   return (
@@ -62,7 +59,6 @@ async function usersLoader() {
   }
 }
 
-
 const ErrorPage = () => {
   const error = useRouteError();
   return (
@@ -72,7 +68,6 @@ const ErrorPage = () => {
     </div>
   );
 };
-
 
 export default function UsersPage() {
   const users = useLoaderData();
@@ -92,11 +87,7 @@ export default function UsersPage() {
 }
 
 const UserDetailPage = () => {
-  console.log('user page');
-
   const user = useLoaderData();
-  console.log('user response');
-  console.log(user);
 
   return (
     <div>
