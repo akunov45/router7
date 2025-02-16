@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import {
-  createBrowserRouter,
+  createHashRouter,
   Link,
   Navigate,
   Outlet,
@@ -107,7 +107,7 @@ async function userLoader({ params }) {
   return res.json();
 }
 
-export const router = createBrowserRouter(
+export const router = createHashRouter(
   [
     {
       path: "/",
