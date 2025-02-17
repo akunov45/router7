@@ -15,7 +15,7 @@ const isAuthenticated = () => {
 const LoginPage = () => {
   const handleLogin = () => {
     localStorage.setItem("auth", "true");
-    window.location.href = "/router7/users";
+    window.location.href = "/users";
   };
 
   return (
@@ -35,9 +35,9 @@ const Layout = () => {
     <>
       <nav>
         <ul>
-          <li><Link to="/router7/">Home</Link></li>
-          <li><Link to="/router7/about">About</Link></li>
-          <li><Link to="/router7/users">Users</Link></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/users">Users</Link></li>
         </ul>
       </nav>
       <Suspense fallback={<div>Loading...</div>}>
@@ -79,7 +79,7 @@ export default function UsersPage() {
       <ul>
         {users.map((user) => (
           <li key={user.id}>
-            <Link to={`/router7/user/${user.id}`}>{user.name}</Link>
+            <Link to={`/user/${user.id}`}>{user.name}</Link>
           </li>
         ))}
       </ul>
